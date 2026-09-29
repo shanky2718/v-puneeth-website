@@ -14,7 +14,7 @@ export const ConferencesPage: React.FC<ConferencesPageProps> = ({ onNavigate }) 
         title="Conferences"
         subtitle="Active engagement in academic conferences as organizer and participant"
         breadcrumb={[{ label: 'Conferences', path: '/conferences' }]}
-        bannerImage="/src/assets/images/banner_conferences.jpg"
+        bannerImage="/assets/images/banner_conferences.jpg"
         onNavigate={onNavigate}
       />
 

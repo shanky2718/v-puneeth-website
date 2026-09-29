@@ -86,7 +86,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="card-glass p-3 relative overflow-hidden shadow-xl border-t-4 border-t-blue-600">
                   <div className="relative rounded-xl overflow-hidden aspect-[4/3] max-h-[340px] bg-slate-100 dark:bg-slate-800">
                     <img 
-                      src="/src/assets/images/dr-puneeth-hero.jpg" 
+                      src="/assets/images/dr-puneeth-hero.jpg" 
                       alt="Dr Puneeth V"
                       className="w-full h-full object-cover"
                     />
@@ -102,7 +102,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   {/* Institutional Banner Image */}
                   <div className="mt-3 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900 max-h-[140px] flex items-center justify-center shadow-inner">
                     <img 
-                      src="/src/assets/images/christ-university-banner.jpg" 
+                      src="/assets/images/christ-university-banner.jpg" 
                       alt="CHRIST University Banner"
                       className="w-full h-full object-contain max-h-[140px]"
                     />

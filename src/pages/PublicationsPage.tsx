@@ -28,7 +28,7 @@ export const PublicationsPage: React.FC<PublicationsPageProps> = ({ onNavigate }
           { label: 'Research', path: '/research' },
           { label: 'Publications', path: '/research/publications' }
         ]}
-        bannerImage="/src/assets/images/banner_publications.jpg"
+        bannerImage="/assets/images/banner_publications.jpg"
         onNavigate={onNavigate}
       />
 

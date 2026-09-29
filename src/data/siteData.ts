@@ -172,7 +172,7 @@ export const collaborators: Collaborator[] = [
     location: "Wadi addawaser, 11991",
     country: "Saudi Arabia",
     specialization: "Thermofluid, Renewable Energy, MHD, Nanofluid",
-    image: "/src/assets/images/collaborator-ahmed-galal.jpg"
+    image: "/assets/images/collaborator-ahmed-galal.jpg"
   },
   {
     name: "Prof. Abdulkafi Mohammed Saeed",
@@ -181,7 +181,7 @@ export const collaborators: Collaborator[] = [
     location: "Buraydah",
     country: "Kingdom of Saudi Arabia",
     specialization: "Thermoelasticity, Fluid Dynamics, Partial Differential Equations, Numerical Analysis, Fractional Partial Differential Equations",
-    image: "/src/assets/images/collaborator-abdulkafi-saeed.jpg"
+    image: "/assets/images/collaborator-abdulkafi-saeed.jpg"
   },
   {
     name: "Prof. Ali J Chamkha",
@@ -190,7 +190,7 @@ export const collaborators: Collaborator[] = [
     location: "Doha District, 35004",
     country: "Kuwait",
     specialization: "Multiphase Flow, Heat and Mass Transfer, Porous Media, Filtration, Nanofluids",
-    image: "/src/assets/images/collaborator-ali-chamkha.jpg"
+    image: "/assets/images/collaborator-ali-chamkha.jpg"
   },
   {
     name: "Dr Shuguang Li",
@@ -199,7 +199,7 @@ export const collaborators: Collaborator[] = [
     location: "Yantai, 264005",
     country: "China",
     specialization: "Geochemistry, Geology, Deep Carbon Recycling",
-    image: "/src/assets/images/collaborator-shuguang-li.jpg"
+    image: "/assets/images/collaborator-shuguang-li.jpg"
   },
   {
     name: "Dr Oluwole D Makinde",
@@ -208,7 +208,7 @@ export const collaborators: Collaborator[] = [
     location: "Stellenbosch",
     country: "South Africa",
     specialization: "Fluid Mechanics, Thermal Science, Applied Mathematics, Modelling and Computations, BioMathematics",
-    image: "/src/assets/images/collaborator-oluwole-makinde.jpg"
+    image: "/assets/images/collaborator-oluwole-makinde.jpg"
   },
   {
     name: "Dr Jae Dong Chung",
@@ -217,7 +217,7 @@ export const collaborators: Collaborator[] = [
     location: "Seoul 05006",
     country: "South Korea",
     specialization: "Mechanical Engineering",
-    image: "/src/assets/images/collaborator-jae-dong-chung.jpg"
+    image: "/assets/images/collaborator-jae-dong-chung.jpg"
   },
   {
     name: "Dr B J Gireesha",
@@ -226,7 +226,7 @@ export const collaborators: Collaborator[] = [
     location: "Jnana Sahyadri, Shimoga-577 451, Karnataka",
     country: "India",
     specialization: "Mathematics, Fluid Mechanics, Stretching Sheet Problems, Nanofluid, Heat Transfer",
-    image: "/src/assets/images/collaborator-bj-gireesha.jpg"
+    image: "/assets/images/collaborator-bj-gireesha.jpg"
   },
   {
     name: "Dr Manjunatha S",
@@ -235,7 +235,7 @@ export const collaborators: Collaborator[] = [
     location: "Bengaluru 560067, Karnataka",
     country: "India",
     specialization: "Fluid Mechanics, Solid Mechanics, Boundary Layer Theory, Nanofluid, Simulations",
-    image: "/src/assets/images/collaborator-manjunatha-s.jpg"
+    image: "/assets/images/collaborator-manjunatha-s.jpg"
   },
   {
     name: "Dr Anandika Rajeev",
@@ -244,7 +244,7 @@ export const collaborators: Collaborator[] = [
     location: "Bengaluru, Karnataka",
     country: "India",
     specialization: "Fluid Mechanics, Chemical Reaction, Multi Layer Flow, Nanofluid, Non-Linear Convection",
-    image: "/src/assets/images/collaborator-anandika-rajeev.jpg"
+    image: "/assets/images/collaborator-anandika-rajeev.jpg"
   }
 ];
 
@@ -253,37 +253,37 @@ export const networkingInstitutions: NetworkingInstitution[] = [
     name: "Prince Sattam Bin Abdulaziz University",
     location: "Saudi Arabia",
     homeUrl: "https://www.psau.edu.sa/",
-    image: "/src/assets/images/institution-prince-sattam.jpg"
+    image: "/assets/images/institution-prince-sattam.jpg"
   },
   {
     name: "Sejong University",
     location: "Seoul, South Korea",
     homeUrl: "https://www.sejong.ac.kr/kor/index.do",
-    image: "/src/assets/images/institution-sejong.jpg"
+    image: "/assets/images/institution-sejong.jpg"
   },
   {
     name: "Stellenbosch University",
     location: "South Africa",
     homeUrl: "https://www.sun.ac.za/english",
-    image: "/src/assets/images/institution-stellenbosch.jpg"
+    image: "/assets/images/institution-stellenbosch.jpg"
   },
   {
     name: "Shandong Technology and Business University",
     location: "Yantai, China",
     homeUrl: "https://www.sdtbu.edu.cn/",
-    image: "/src/assets/images/institution-shandong.jpg"
+    image: "/assets/images/institution-shandong.jpg"
   },
   {
     name: "Kuwait College of Science and Technology",
     location: "Doha District, Kuwait",
     homeUrl: "https://www.kcst.edu.kw/en",
-    image: "/src/assets/images/institution-kuwait-college.jpg"
+    image: "/assets/images/institution-kuwait-college.jpg"
   },
   {
     name: "Qassim University",
     location: "Saudi Arabia",
     homeUrl: "https://www.qu.edu.sa/",
-    image: "/src/assets/images/institution-qassim.jpg"
+    image: "/assets/images/institution-qassim.jpg"
   }
 ];
 

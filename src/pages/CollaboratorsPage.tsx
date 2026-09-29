@@ -17,7 +17,7 @@ export const CollaboratorsPage: React.FC<CollaboratorsPageProps> = ({ onNavigate
           { label: 'Research', path: '/research' },
           { label: 'Collaborators', path: '/research/collaborators' }
         ]}
-        bannerImage="/src/assets/images/banner_collaborators.jpg"
+        bannerImage="/assets/images/banner_collaborators.jpg"
         onNavigate={onNavigate}
       />
 

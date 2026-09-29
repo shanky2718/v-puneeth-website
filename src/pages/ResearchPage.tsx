@@ -14,7 +14,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ onNavigate }) => {
         title="Research Publications"
         subtitle="Boundary Layer Theory, Nanofluid Dynamics, and Stability Analysis of Complex Flows"
         breadcrumb={[{ label: 'Research', path: '/research' }]}
-        bannerImage="/src/assets/images/banner_research.jpg"
+        bannerImage="/assets/images/banner_research.jpg"
         onNavigate={onNavigate}
       />
 
