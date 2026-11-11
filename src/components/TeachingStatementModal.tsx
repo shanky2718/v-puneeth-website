@@ -3,11 +3,22 @@ import { motion } from 'framer-motion';
 import { TEACHING_STATEMENT_SECTIONS, coursesData, testimonials, type CourseModule } from '../data/portfolio';
 import { useScrollLock } from '../hooks/smoothScroll';
 
-export default function TeachingStatementModal({ onClose }: { onClose: () => void }) {
+export default function TeachingStatementModal({
+  initialTab = 'statement',
+  onClose,
+}: {
+  initialTab?: 'statement' | 'courses' | 'testimonials';
+  onClose: () => void;
+}) {
   useScrollLock(true);
-  const [activeTab, setActiveTab] = useState<'statement' | 'courses' | 'testimonials'>('statement');
+  const [activeTab, setActiveTab] = useState<'statement' | 'courses' | 'testimonials'>(initialTab);
   const [activeChapterId, setActiveChapterId] = useState(TEACHING_STATEMENT_SECTIONS[0].id);
+  const [selectedCourseId, setSelectedCourseId] = useState<string>('all');
   const scrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
@@ -182,14 +193,51 @@ export default function TeachingStatementModal({ onClose }: { onClose: () => voi
           {activeTab === 'courses' && (
             <div className="space-y-6">
               <div className="mb-6">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson-2">Curriculum Delivery</p>
-                <h3 className="font-display text-3xl tracking-wide text-bone sm:text-4xl">Courses Taught & Syllabi</h3>
-                <p className="mt-2 text-sm text-mist">
-                  Undergraduate and postgraduate curricula designed with rigorous mathematical theory and scientific computing.
-                </p>
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson-2">Curriculum Delivery</p>
+                    <h3 className="font-display text-3xl tracking-wide text-bone sm:text-4xl">Mathematics Subjects Handled</h3>
+                    <p className="mt-1 text-sm text-mist">
+                      11 specialized curricula designed and delivered by Dr. Puneeth V with rigorous mathematical theory and scientific computing.
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-crimson/20 px-3 py-1 font-mono text-xs font-bold text-crimson-2 ring-1 ring-crimson/30">
+                    11 Subjects
+                  </span>
+                </div>
+
+                {/* Course Jump Bar */}
+                <div className="rail mt-4 flex gap-1.5 overflow-x-auto pb-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCourseId('all')}
+                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition ${
+                      selectedCourseId === 'all'
+                        ? 'bg-crimson text-white shadow-[0_0_12px_rgba(229,19,43,0.4)]'
+                        : 'bg-white/5 text-mist hover:bg-white/10 hover:text-bone'
+                    }`}
+                  >
+                    All 11 Subjects
+                  </button>
+                  {coursesData.map((c, idx) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => setSelectedCourseId(c.id)}
+                      className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition ${
+                        selectedCourseId === c.id
+                          ? 'bg-crimson text-white shadow-[0_0_12px_rgba(229,19,43,0.4)]'
+                          : 'bg-white/5 text-mist hover:bg-white/10 hover:text-bone'
+                      }`}
+                    >
+                      <span className="mr-1 opacity-60 font-mono">{idx + 1}.</span>
+                      {c.title}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {coursesData.map((c) => (
+              {(selectedCourseId === 'all' ? coursesData : coursesData.filter((c) => c.id === selectedCourseId)).map((c) => (
                 <div key={c.id} className="rounded-2xl bg-ink-2 p-6 ring-1 ring-white/10 sm:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/10 pb-4">
                     <div>

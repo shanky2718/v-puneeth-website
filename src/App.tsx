@@ -61,6 +61,7 @@ function Series() {
   const [publicationsOpen, setPublicationsOpen] = useState(false);
   const [collaboratorsOpen, setCollaboratorsOpen] = useState(false);
   const [teachingOpen, setTeachingOpen] = useState(false);
+  const [teachingTab, setTeachingTab] = useState<'statement' | 'courses' | 'testimonials'>('statement');
   const [administrationOpen, setAdministrationOpen] = useState(false);
   const [activitiesOpen, setActivitiesOpen] = useState(false);
   const [activitiesTab, setActivitiesTab] = useState<'funding' | 'events' | 'talks' | 'certifications' | 'references'>('funding');
@@ -110,6 +111,11 @@ function Series() {
   const closeAdministration = useCallback(() => setAdministrationOpen(false), []);
   const closeActivities = useCallback(() => setActivitiesOpen(false), []);
 
+  const openTeachingWithTab = useCallback((tab: 'statement' | 'courses' | 'testimonials' = 'statement') => {
+    setTeachingTab(tab);
+    setTeachingOpen(true);
+  }, []);
+
   const openActivitiesWithTab = useCallback((tab: 'funding' | 'events' | 'talks' | 'certifications' | 'references' = 'funding') => {
     setActivitiesTab(tab);
     setActivitiesOpen(true);
@@ -118,7 +124,7 @@ function Series() {
   const sections: Record<SectionId, ReactNode> = {
     about: (
       <About
-        onOpenTeaching={() => setTeachingOpen(true)}
+        onOpenTeaching={openTeachingWithTab}
         onOpenAdministration={() => setAdministrationOpen(true)}
       />
     ),
@@ -140,7 +146,7 @@ function Series() {
     story: (
       <ResumeSection
         onView={() => setResumeOpen(true)}
-        onOpenTeaching={() => setTeachingOpen(true)}
+        onOpenTeaching={openTeachingWithTab}
         onOpenPublications={() => setPublicationsOpen(true)}
         onOpenAdministration={() => setAdministrationOpen(true)}
       />
@@ -165,7 +171,7 @@ function Series() {
             onSwitch={pickProfile}
             onReplay={() => setStage('opening')}
             onOpenPublications={() => setPublicationsOpen(true)}
-            onOpenTeaching={() => setTeachingOpen(true)}
+            onOpenTeaching={openTeachingWithTab}
             onOpenCollaborators={() => setCollaboratorsOpen(true)}
             onOpenAdministration={() => setAdministrationOpen(true)}
             onOpenActivities={openActivitiesWithTab}
@@ -176,7 +182,7 @@ function Series() {
               onPlay={() => setPlaying(true)}
               onResume={() => setResumeOpen(true)}
               onOpenPublications={() => setPublicationsOpen(true)}
-              onOpenTeaching={() => setTeachingOpen(true)}
+              onOpenTeaching={openTeachingWithTab}
               profileId={profileId}
             />
             <ContinueWatching order={order} />
@@ -189,7 +195,7 @@ function Series() {
             <FinalCTA
               onReplay={() => setStage('opening')}
               onOpenPublications={() => setPublicationsOpen(true)}
-              onOpenTeaching={() => setTeachingOpen(true)}
+              onOpenTeaching={openTeachingWithTab}
               onOpenAdministration={() => setAdministrationOpen(true)}
               onOpenActivities={openActivitiesWithTab}
             />
@@ -203,7 +209,7 @@ function Series() {
         <AnimatePresence>{resumeOpen && <ResumeModal key="resume" onClose={closeResume} />}</AnimatePresence>
         <AnimatePresence>{publicationsOpen && <PublicationsModal key="pubs" onClose={closePublications} />}</AnimatePresence>
         <AnimatePresence>{collaboratorsOpen && <CollaboratorsModal key="collabs" onClose={closeCollaborators} />}</AnimatePresence>
-        <AnimatePresence>{teachingOpen && <TeachingStatementModal key="teaching" onClose={closeTeaching} />}</AnimatePresence>
+        <AnimatePresence>{teachingOpen && <TeachingStatementModal key="teaching" initialTab={teachingTab} onClose={closeTeaching} />}</AnimatePresence>
         <AnimatePresence>{administrationOpen && <AdministrationModal key="admin" onClose={closeAdministration} />}</AnimatePresence>
         <AnimatePresence>{activitiesOpen && <AcademicActivitiesModal key="activities" initialTab={activitiesTab} onClose={closeActivities} />}</AnimatePresence>
       </Suspense>

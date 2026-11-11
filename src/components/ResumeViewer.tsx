@@ -12,7 +12,8 @@ import {
   GRANTS_AND_FUNDING,
   CONSULTANCY_PROJECTS,
   INVITED_TALKS,
-  academicReferences
+  academicReferences,
+  MATHEMATICS_SUBJECTS_HANDLED
 } from '../data/portfolio';
 import { EASE, Magnetic, SectionHeading } from './fx';
 
@@ -24,7 +25,7 @@ export default function ResumeSection({
   onOpenAdministration
 }: {
   onView: () => void;
-  onOpenTeaching?: () => void;
+  onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenPublications?: () => void;
   onOpenAdministration?: () => void;
 }) {
@@ -72,7 +73,7 @@ export default function ResumeSection({
             {onOpenTeaching && (
               <button
                 type="button"
-                onClick={onOpenTeaching}
+                onClick={() => onOpenTeaching('statement')}
                 className="rounded-md border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-bone hover:bg-white/10 text-center transition"
               >
                 🎓 The Art of Teaching Statement ↗
@@ -205,6 +206,27 @@ export function ResumeSheet() {
               </ul>
             </div>
           ))}
+
+          {/* Mathematics Subjects Handled */}
+          <div className="mb-6 rounded-xl bg-white/[0.02] p-4 ring-1 ring-white/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/10 pb-2 mb-3">
+              <p className="text-xs font-bold uppercase tracking-wider text-crimson-2">
+                Mathematics Subjects Handled (11 Courses)
+              </p>
+              <span className="text-[11px] font-semibold text-smoke">
+                UG & PG Curricula · CHRIST University
+              </span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {MATHEMATICS_SUBJECTS_HANDLED.map((sub) => (
+                <div key={sub.id} className="flex items-center gap-2 rounded-lg bg-white/[0.02] px-2.5 py-1.5 ring-1 ring-white/5">
+                  <span className="font-mono text-[10px] font-bold text-crimson-2 w-4 text-center">{sub.number}.</span>
+                  <span className="font-mono text-[9px] font-semibold px-1 rounded bg-white/10 text-smoke">{sub.code}</span>
+                  <span className="text-xs font-medium text-bone truncate">{sub.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <H>Administrative Appointments (6 Positions)</H>
           <div className="space-y-3">

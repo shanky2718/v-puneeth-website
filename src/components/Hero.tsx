@@ -22,7 +22,7 @@ export default function Hero({
   onPlay: () => void;
   onResume: () => void;
   onOpenPublications?: () => void;
-  onOpenTeaching?: () => void;
+  onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   profileId: ProfileId;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -183,7 +183,7 @@ export default function Hero({
             <Magnetic>
               <button
                 type="button"
-                onClick={onOpenTeaching}
+                onClick={() => onOpenTeaching('statement')}
                 className="glass hidden sm:flex min-h-12 items-center gap-2 rounded-md px-4 py-3 text-[14px] font-semibold text-bone transition hover:bg-white/15"
               >
                 <span>🎓</span> Teaching Statement

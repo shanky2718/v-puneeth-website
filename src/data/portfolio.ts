@@ -1641,6 +1641,118 @@ export const interns: Intern[] = [
   }
 ];
 
+export interface HandledSubject {
+  id: string;
+  number: number;
+  name: string;
+  code: string;
+  level: string;
+  category: 'Pure Mathematics' | 'Applied Mathematics' | 'Computational & Data Analytics' | 'Foundations';
+  description: string;
+}
+
+export const MATHEMATICS_SUBJECTS_HANDLED: HandledSubject[] = [
+  {
+    id: 'number-theory',
+    number: 1,
+    name: 'Number Theory',
+    code: 'MAT631',
+    level: 'Postgraduate',
+    category: 'Pure Mathematics',
+    description: 'Divisibility, primes, congruences, arithmetic functions, quadratic reciprocity, and cryptographic applications (RSA).',
+  },
+  {
+    id: 'differential-calculus',
+    number: 2,
+    name: 'Differential Calculus',
+    code: 'MAT131',
+    level: 'Undergraduate',
+    category: 'Foundations',
+    description: 'Limits, continuity, mean value theorems, Taylor series expansions, curvature, and partial differentiation.',
+  },
+  {
+    id: 'differential-equations',
+    number: 3,
+    name: 'Differential Equations',
+    code: 'MAT231',
+    level: 'Undergraduate',
+    category: 'Applied Mathematics',
+    description: 'Higher-order linear ODEs, series solutions, Laplace transforms, first-order PDEs, and separation of variables.',
+  },
+  {
+    id: 'advanced-linear-programming',
+    number: 4,
+    name: 'Advanced Linear Programming',
+    code: 'MAT441',
+    level: 'Undergraduate',
+    category: 'Applied Mathematics',
+    description: 'Simplex algorithm, duality theory, sensitivity analysis, transportation & assignment models, and game theory.',
+  },
+  {
+    id: 'mathematical-modelling-simulation',
+    number: 5,
+    name: 'Mathematical Modelling and Simulation',
+    code: 'MAT541',
+    level: 'Postgraduate',
+    category: 'Applied Mathematics',
+    description: 'Formulation of dynamical, biological, and fluid flow models, perturbation techniques, and computational simulation.',
+  },
+  {
+    id: 'intro-mathematical-modelling',
+    number: 6,
+    name: 'Introduction to Mathematical Modelling',
+    code: 'MAT341',
+    level: 'Undergraduate',
+    category: 'Applied Mathematics',
+    description: 'Modelling methodology, difference equations, continuous dynamics, model calibration, and simulation.',
+  },
+  {
+    id: 'math-foundations-data-analytics',
+    number: 7,
+    name: 'Mathematical Foundations for Data Analytics',
+    code: 'MAT351',
+    level: 'Undergraduate',
+    category: 'Computational & Data Analytics',
+    description: 'Linear algebra for data science (SVD, PCA), multivariate probability distributions, and machine learning optimization.',
+  },
+  {
+    id: 'foundational-mathematics',
+    number: 8,
+    name: 'Foundational Mathematics',
+    code: 'MAT101',
+    level: 'Undergraduate',
+    category: 'Foundations',
+    description: 'Sets, mathematical logic, polynomial algebra, trigonometry, coordinate geometry, and introductory calculus.',
+  },
+  {
+    id: 'discrete-mathematics',
+    number: 9,
+    name: 'Discrete Mathematics',
+    code: 'MAT251',
+    level: 'Undergraduate',
+    category: 'Pure Mathematics',
+    description: 'Propositional logic, proof methods, relations, recurrence relations, combinatorics, and graph/tree theory.',
+  },
+  {
+    id: 'linear-algebra',
+    number: 10,
+    name: 'Linear Algebra',
+    code: 'MAT261',
+    level: 'Undergraduate',
+    category: 'Pure Mathematics',
+    description: 'Vector spaces, subspaces, linear transformations, eigenvalues, eigenvectors, and inner product spaces.',
+  },
+  {
+    id: 'numerical-methods',
+    number: 11,
+    name: 'Numerical Methods',
+    code: 'MAT371',
+    level: 'Undergraduate',
+    category: 'Computational & Data Analytics',
+    description: 'Error analysis, root finding, numerical linear systems, interpolation, numerical quadrature, and Runge-Kutta ODE solvers.',
+  },
+];
+
 // 11. DETAILED COURSES TAUGHT
 export const coursesData: Course[] = [
   {

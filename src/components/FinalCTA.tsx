@@ -14,7 +14,7 @@ export default function FinalCTA({
 }: {
   onReplay: () => void;
   onOpenPublications?: () => void;
-  onOpenTeaching?: () => void;
+  onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenAdministration?: () => void;
   onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
 }) {
@@ -126,13 +126,22 @@ export default function FinalCTA({
           </button>
         )}
         {onOpenTeaching && (
-          <button
-            type="button"
-            onClick={onOpenTeaching}
-            className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
-          >
-            🎓 Teaching Statement
-          </button>
+          <>
+            <button
+              type="button"
+              onClick={() => onOpenTeaching('statement')}
+              className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+            >
+              🎓 Teaching Statement
+            </button>
+            <button
+              type="button"
+              onClick={() => onOpenTeaching('courses')}
+              className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+            >
+              📐 11 Mathematics Subjects
+            </button>
+          </>
         )}
         {onOpenAdministration && (
           <button

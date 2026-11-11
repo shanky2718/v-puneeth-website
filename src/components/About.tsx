@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   profile,
   education,
   ABOUT_PARAGRAPHS,
   spokenLanguages,
-  professionalMemberships
+  professionalMemberships,
+  MATHEMATICS_SUBJECTS_HANDLED,
 } from '../data/portfolio';
 import { EASE, SectionHeading, Tilt } from './fx';
 
@@ -12,9 +14,14 @@ export default function About({
   onOpenTeaching,
   onOpenAdministration
 }: {
-  onOpenTeaching?: () => void;
+  onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenAdministration?: () => void;
 }) {
+  const [subjectFilter, setSubjectFilter] = useState<'All' | 'Pure Mathematics' | 'Applied Mathematics' | 'Computational & Data Analytics' | 'Foundations'>('All');
+
+  const filteredSubjects = subjectFilter === 'All'
+    ? MATHEMATICS_SUBJECTS_HANDLED
+    : MATHEMATICS_SUBJECTS_HANDLED.filter((s) => s.category === subjectFilter);
   const facts = [
     { k: 'Affiliation', v: 'CHRIST (Deemed to be University)', s: 'Assistant Professor · Department of Mathematics' },
     { k: 'Global Honor', v: 'Stanford Top 2% Scientist', s: 'Most Influential Scientists Worldwide (2024 & 2025)' },
@@ -130,7 +137,7 @@ export default function About({
               {onOpenTeaching && (
                 <button
                   type="button"
-                  onClick={onOpenTeaching}
+                  onClick={() => onOpenTeaching('statement')}
                   className="rounded-lg bg-crimson px-4 py-2 text-xs font-semibold text-white transition hover:bg-crimson-2"
                 >
                   Read Full Teaching Statement →
@@ -169,6 +176,89 @@ export default function About({
                   <p className="text-[11px] text-smoke mt-0.5 font-medium">{e.score}</p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Mathematics Subjects Handled by Dr. Puneeth V */}
+          <div className="rounded-2xl bg-ink-2 p-6 sm:p-8 ring-1 ring-white/10 space-y-5">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/10 pb-4">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson-2">
+                  Curricular Portfolio
+                </span>
+                <h3 className="mt-1 font-display text-2xl tracking-wide text-bone sm:text-3xl">
+                  Mathematics Subjects Handled
+                </h3>
+                <p className="mt-1 text-xs text-mist">
+                  11 specialized mathematics courses taught across Undergraduate and Postgraduate programs at CHRIST (Deemed to be University)
+                </p>
+              </div>
+              <span className="rounded-full bg-crimson/15 px-3 py-1 font-mono text-xs font-bold text-crimson-2 ring-1 ring-crimson/30">
+                11 Subjects
+              </span>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-1.5">
+              {(['All', 'Pure Mathematics', 'Applied Mathematics', 'Computational & Data Analytics', 'Foundations'] as const).map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSubjectFilter(cat)}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                    subjectFilter === cat
+                      ? 'bg-crimson text-white shadow-[0_0_15px_rgba(229,19,43,0.35)]'
+                      : 'bg-white/5 text-mist hover:bg-white/10 hover:text-bone'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Grid of 11 Subjects */}
+            <div className="grid gap-3 sm:grid-cols-2">
+              {filteredSubjects.map((sub) => (
+                <div
+                  key={sub.id}
+                  className="group relative rounded-xl bg-white/[0.02] p-4 ring-1 ring-white/5 hover:ring-crimson/40 hover:bg-white/[0.04] transition"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-crimson/20 font-mono text-[11px] font-bold text-crimson-2">
+                        {sub.number}
+                      </span>
+                      <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-smoke">
+                        {sub.code}
+                      </span>
+                    </div>
+                    <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-mist">
+                      {sub.level}
+                    </span>
+                  </div>
+                  <h4 className="mt-2.5 font-sans text-sm font-bold text-bone group-hover:text-crimson-2 transition">
+                    {sub.name}
+                  </h4>
+                  <p className="mt-1 text-xs leading-relaxed text-mist line-clamp-2">
+                    {sub.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-xs text-smoke">
+                All courses incorporate learner-centric pedagogy, diagnostic assessments, and derivation notebooks.
+              </p>
+              {onOpenTeaching && (
+                <button
+                  type="button"
+                  onClick={() => onOpenTeaching('courses')}
+                  className="rounded-lg bg-crimson px-4 py-2 text-xs font-semibold text-white transition hover:bg-crimson-2"
+                >
+                  View Full Syllabi & Course Modules →
+                </button>
+              )}
             </div>
           </div>
 

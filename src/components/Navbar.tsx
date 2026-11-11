@@ -22,7 +22,7 @@ export default function Navbar({
   onSwitch: (id: ProfileId) => void;
   onReplay?: () => void;
   onOpenPublications?: () => void;
-  onOpenTeaching?: () => void;
+  onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenCollaborators?: () => void;
   onOpenAdministration?: () => void;
   onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
@@ -138,17 +138,30 @@ export default function Navbar({
                       </button>
                     )}
                     {onOpenTeaching && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setDossierMenu(false);
-                          onOpenTeaching();
-                        }}
-                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
-                      >
-                        <span className="text-crimson-2 font-mono">02.</span>
-                        <span>The Art of Teaching (Statement)</span>
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDossierMenu(false);
+                            onOpenTeaching('statement');
+                          }}
+                          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
+                        >
+                          <span className="text-crimson-2 font-mono">02.</span>
+                          <span>The Art of Teaching (Statement)</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDossierMenu(false);
+                            onOpenTeaching('courses');
+                          }}
+                          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
+                        >
+                          <span className="text-crimson-2 font-mono">03.</span>
+                          <span>Mathematics Subjects Handled (11 Courses)</span>
+                        </button>
+                      </>
                     )}
                     {onOpenCollaborators && (
                       <button
@@ -159,7 +172,7 @@ export default function Navbar({
                         }}
                         className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                       >
-                        <span className="text-crimson-2 font-mono">03.</span>
+                        <span className="text-crimson-2 font-mono">04.</span>
                         <span>Research Lab & Collaborators</span>
                       </button>
                     )}
@@ -172,7 +185,7 @@ export default function Navbar({
                         }}
                         className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                       >
-                        <span className="text-crimson-2 font-mono">04.</span>
+                        <span className="text-crimson-2 font-mono">05.</span>
                         <span>Administration & IQAC</span>
                       </button>
                     )}
@@ -186,7 +199,7 @@ export default function Navbar({
                           }}
                           className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                         >
-                          <span className="text-crimson-2 font-mono">05.</span>
+                          <span className="text-crimson-2 font-mono">06.</span>
                           <span>Grants (INR 12L+) & Consultancy</span>
                         </button>
                         <button
@@ -197,7 +210,7 @@ export default function Navbar({
                           }}
                           className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                         >
-                          <span className="text-crimson-2 font-mono">06.</span>
+                          <span className="text-crimson-2 font-mono">07.</span>
                           <span>Academic Conferences & SAINTS</span>
                         </button>
                         <button
@@ -208,7 +221,7 @@ export default function Navbar({
                           }}
                           className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                         >
-                          <span className="text-crimson-2 font-mono">07.</span>
+                          <span className="text-crimson-2 font-mono">08.</span>
                           <span>Invited Keynotes & FDP Talks</span>
                         </button>
                         <button
@@ -219,7 +232,7 @@ export default function Navbar({
                           }}
                           className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-xs font-semibold text-bone hover:bg-white/10"
                         >
-                          <span className="text-crimson-2 font-mono">08.</span>
+                          <span className="text-crimson-2 font-mono">09.</span>
                           <span>9 Online Certifications</span>
                         </button>
                       </>
@@ -374,16 +387,28 @@ export default function Navbar({
                 </button>
               )}
               {onOpenTeaching && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileNav(false);
-                    onOpenTeaching();
-                  }}
-                  className="block w-full text-left py-1 text-sm font-semibold text-bone"
-                >
-                  🎓 The Art of Teaching Statement
-                </button>
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileNav(false);
+                      onOpenTeaching('courses');
+                    }}
+                    className="block w-full text-left py-1 text-sm font-semibold text-bone hover:text-crimson-2"
+                  >
+                    📐 Mathematics Subjects Handled (11 Courses)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileNav(false);
+                      onOpenTeaching('statement');
+                    }}
+                    className="block w-full text-left py-1 text-sm font-semibold text-bone"
+                  >
+                    🎓 The Art of Teaching Statement
+                  </button>
+                </>
               )}
               {onOpenCollaborators && (
                 <button
