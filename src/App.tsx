@@ -16,17 +16,23 @@ import TopPicks from './components/TopPicks';
 import Skills from './components/Skills';
 import Achievements from './components/Achievements';
 import ResumeSection from './components/ResumeViewer';
+import TestimonialsSection from './components/TestimonialsSection';
 import FinalCTA from './components/FinalCTA';
 import { EASE } from './components/fx';
 
-// Overlays are only needed on demand — split them out of the first load.
+// Overlays are loaded on demand
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
 const ProjectModal = lazy(() => import('./components/ProjectModal'));
 const ResumeModal = lazy(() => import('./components/ResumeModal'));
+const PublicationsModal = lazy(() => import('./components/PublicationsModal'));
+const CollaboratorsModal = lazy(() => import('./components/CollaboratorsModal'));
+const TeachingStatementModal = lazy(() => import('./components/TeachingStatementModal'));
+const AdministrationModal = lazy(() => import('./components/AdministrationModal'));
+const AcademicActivitiesModal = lazy(() => import('./components/AcademicActivitiesModal'));
 
 type Stage = 'opening' | 'profiles' | 'home';
 
-const STORAGE_KEY = 'sushmita-series-profile';
+const STORAGE_KEY = 'puneeth-series-profile';
 
 function readStoredProfile(): ProfileId | null {
   try {
@@ -47,11 +53,17 @@ export default function App() {
 
 function Series() {
   const stored = readStoredProfile();
-  const [stage, setStage] = useState<Stage>(stored ? 'home' : 'opening');
-  const [profileId, setProfileId] = useState<ProfileId>(stored ?? 'sushmita');
+  const [stage, setStage] = useState<Stage>('opening');
+  const [profileId, setProfileId] = useState<ProfileId>(stored ?? 'puneeth');
   const [playing, setPlaying] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [publicationsOpen, setPublicationsOpen] = useState(false);
+  const [collaboratorsOpen, setCollaboratorsOpen] = useState(false);
+  const [teachingOpen, setTeachingOpen] = useState(false);
+  const [administrationOpen, setAdministrationOpen] = useState(false);
+  const [activitiesOpen, setActivitiesOpen] = useState(false);
+  const [activitiesTab, setActivitiesTab] = useState<'funding' | 'events' | 'talks' | 'certifications' | 'references'>('funding');
   const [toast, setToast] = useState<string | null>(null);
   const { scrollTo, lock, unlock } = useSmoothScroll();
 
@@ -92,15 +104,47 @@ function Series() {
   const closeIntro = useCallback(() => setPlaying(false), []);
   const closeProject = useCallback(() => setProject(null), []);
   const closeResume = useCallback(() => setResumeOpen(false), []);
+  const closePublications = useCallback(() => setPublicationsOpen(false), []);
+  const closeCollaborators = useCallback(() => setCollaboratorsOpen(false), []);
+  const closeTeaching = useCallback(() => setTeachingOpen(false), []);
+  const closeAdministration = useCallback(() => setAdministrationOpen(false), []);
+  const closeActivities = useCallback(() => setActivitiesOpen(false), []);
+
+  const openActivitiesWithTab = useCallback((tab: 'funding' | 'events' | 'talks' | 'certifications' | 'references' = 'funding') => {
+    setActivitiesTab(tab);
+    setActivitiesOpen(true);
+  }, []);
 
   const sections: Record<SectionId, ReactNode> = {
-    about: <About />,
+    about: (
+      <About
+        onOpenTeaching={() => setTeachingOpen(true)}
+        onOpenAdministration={() => setAdministrationOpen(true)}
+      />
+    ),
     journey: <Seasons />,
-    originals: <Originals onOpen={setProject} />,
+    originals: (
+      <Originals
+        onOpen={setProject}
+        onOpenPublications={() => setPublicationsOpen(true)}
+        onOpenCollaborators={() => setCollaboratorsOpen(true)}
+      />
+    ),
     picks: <TopPicks />,
     skills: <Skills />,
-    moments: <Achievements />,
-    story: <ResumeSection onView={() => setResumeOpen(true)} />,
+    moments: (
+      <Achievements
+        onOpenActivities={openActivitiesWithTab}
+      />
+    ),
+    story: (
+      <ResumeSection
+        onView={() => setResumeOpen(true)}
+        onOpenTeaching={() => setTeachingOpen(true)}
+        onOpenPublications={() => setPublicationsOpen(true)}
+        onOpenAdministration={() => setAdministrationOpen(true)}
+      />
+    ),
   };
 
   return (
@@ -115,16 +159,40 @@ function Series() {
 
       {stage === 'home' && (
         <motion.div initial={{ opacity: 0, scale: 1.03, filter: 'blur(10px)' }} animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }} transition={{ duration: 1, ease: EASE }}>
-          <Navbar order={order} profileId={profileId} onSwitch={pickProfile} />
+          <Navbar
+            order={order}
+            profileId={profileId}
+            onSwitch={pickProfile}
+            onReplay={() => setStage('opening')}
+            onOpenPublications={() => setPublicationsOpen(true)}
+            onOpenTeaching={() => setTeachingOpen(true)}
+            onOpenCollaborators={() => setCollaboratorsOpen(true)}
+            onOpenAdministration={() => setAdministrationOpen(true)}
+            onOpenActivities={openActivitiesWithTab}
+          />
           <main>
-            <Hero key={`hero-${profileId}`} onPlay={() => setPlaying(true)} onResume={() => setResumeOpen(true)} profileId={profileId} />
+            <Hero
+              key={`hero-${profileId}`}
+              onPlay={() => setPlaying(true)}
+              onResume={() => setResumeOpen(true)}
+              onOpenPublications={() => setPublicationsOpen(true)}
+              onOpenTeaching={() => setTeachingOpen(true)}
+              profileId={profileId}
+            />
             <ContinueWatching order={order} />
             {order.map((id) => (
               <Scene key={id} id={id} className={id === 'originals' ? '!py-0 sm:!py-0' : ''}>
                 {sections[id]}
               </Scene>
             ))}
-            <FinalCTA onReplay={() => setStage('opening')} />
+            <TestimonialsSection />
+            <FinalCTA
+              onReplay={() => setStage('opening')}
+              onOpenPublications={() => setPublicationsOpen(true)}
+              onOpenTeaching={() => setTeachingOpen(true)}
+              onOpenAdministration={() => setAdministrationOpen(true)}
+              onOpenActivities={openActivitiesWithTab}
+            />
           </main>
         </motion.div>
       )}
@@ -133,6 +201,11 @@ function Series() {
         <AnimatePresence>{playing && <PlayIntro key="intro" onClose={closeIntro} />}</AnimatePresence>
         <AnimatePresence>{project && <ProjectModal key="project" project={project} onClose={closeProject} onSwitch={setProject} />}</AnimatePresence>
         <AnimatePresence>{resumeOpen && <ResumeModal key="resume" onClose={closeResume} />}</AnimatePresence>
+        <AnimatePresence>{publicationsOpen && <PublicationsModal key="pubs" onClose={closePublications} />}</AnimatePresence>
+        <AnimatePresence>{collaboratorsOpen && <CollaboratorsModal key="collabs" onClose={closeCollaborators} />}</AnimatePresence>
+        <AnimatePresence>{teachingOpen && <TeachingStatementModal key="teaching" onClose={closeTeaching} />}</AnimatePresence>
+        <AnimatePresence>{administrationOpen && <AdministrationModal key="admin" onClose={closeAdministration} />}</AnimatePresence>
+        <AnimatePresence>{activitiesOpen && <AcademicActivitiesModal key="activities" initialTab={activitiesTab} onClose={closeActivities} />}</AnimatePresence>
       </Suspense>
 
       <AnimatePresence>

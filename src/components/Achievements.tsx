@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { achievements, certifications } from '../data/portfolio';
+import { achievements, CERTIFICATIONS_LIST } from '../data/portfolio';
 import { EASE, SectionHeading, Tilt } from './fx';
 import { RailButtons } from './Rail';
 
@@ -15,13 +15,57 @@ function Laurel({ side }: { side: 'l' | 'r' }) {
   );
 }
 
-export default function Achievements() {
+export default function Achievements({
+  onOpenActivities
+}: {
+  onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
+}) {
   const rail = useRef<HTMLDivElement>(null);
-  const issuers = Array.from(new Set(certifications.map((c) => c.issuer)));
 
   return (
     <>
       <SectionHeading kicker="Awards season" title="Top Moments" />
+
+      {/* Extramural Grants & Conferences Feature Banner */}
+      <div className="gutter mb-10">
+        <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-ink-2 via-ink-2 to-ink p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="flex items-center gap-2">
+              <span className="rounded bg-crimson/20 px-2 py-0.5 font-mono text-[10px] font-bold text-crimson-2">
+                EXTRAMURAL GRANTS & CONFERENCES
+              </span>
+              <span className="font-mono text-xs text-smoke">INR 12,00,000+ Secured</span>
+            </div>
+            <h3 className="font-display text-2xl text-bone sm:text-3xl">
+              Research Grants, Consultancy & Academic Symposia
+            </h3>
+            <p className="text-xs text-mist leading-relaxed">
+              Funded research from the Ministry of Jal Shakti, ANRF, AICTE VAANI, and CHRIST University, alongside ATOMALLOYS 5000L tank CFD industrial consultancy.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2.5 shrink-0">
+            {onOpenActivities && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => onOpenActivities('funding')}
+                  className="rounded-lg bg-crimson px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-crimson-2"
+                >
+                  View Grants & Consultancy →
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onOpenActivities('events')}
+                  className="rounded-lg bg-white/10 px-4 py-2.5 text-xs font-semibold text-bone transition hover:bg-white/20"
+                >
+                  Conferences & SAINTS 2026 →
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
 
       <div className="gutter grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 [perspective:1400px]">
         {achievements.map((a, i) => (
@@ -63,35 +107,49 @@ export default function Achievements() {
         ))}
       </div>
 
-      {/* certifications rail */}
+      {/* Online certifications collection from PDF */}
       <div className="mt-16">
-        <div className="gutter mb-2 flex flex-wrap items-end justify-between gap-2">
-          <h3 className="font-sans text-lg font-semibold text-bone sm:text-2xl">
-            Certified <span className="text-mist">· {certifications.length} credentials</span>
-          </h3>
-          <p className="text-xs text-smoke">{issuers.join(' · ')}</p>
+        <div className="gutter mb-3 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h3 className="font-sans text-lg font-semibold text-bone sm:text-2xl">
+              Professional Courses & Specializations <span className="text-mist">· {CERTIFICATIONS_LIST.length} Programs</span>
+            </h3>
+            <p className="text-xs text-smoke mt-0.5">
+              Verified certifications from IBM, Yale University, Cambridge, Northwestern, UPenn, Toronto & Wesleyan
+            </p>
+          </div>
+          {onOpenActivities && (
+            <button
+              type="button"
+              onClick={() => onOpenActivities('certifications')}
+              className="text-xs font-semibold text-crimson-2 hover:underline"
+            >
+              View Full Certifications Dossier ↗
+            </button>
+          )}
         </div>
         <div className="group/rail relative">
           <div ref={rail} className="rail gutter flex snap-x gap-3 overflow-x-auto py-5">
-            {certifications.map((c, i) => (
-              <motion.a
-                key={c.name}
-                href={c.link}
-                target="_blank"
-                rel="noreferrer"
-                data-cursor="link"
-                className="group relative flex w-[230px] shrink-0 snap-start flex-col justify-between rounded-xl bg-ink-2 p-4 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-white/30"
+            {CERTIFICATIONS_LIST.map((c, i) => (
+              <motion.div
+                key={c.id}
+                className="group relative flex w-[260px] shrink-0 snap-start flex-col justify-between rounded-xl bg-ink-2 p-5 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-white/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: Math.min(i, 6) * 0.04, ease: EASE }}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-crimson-2">{c.issuer}</span>
-                  <span className="text-sm text-smoke transition group-hover:text-bone">↗</span>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-crimson-2">{c.institution}</span>
+                    <span className="font-mono text-[10px] text-smoke">{c.year}</span>
+                  </div>
+                  <p className="mt-3 text-sm font-semibold leading-snug text-bone">{c.title}</p>
                 </div>
-                <p className="mt-6 text-sm font-medium leading-snug text-bone">{c.name}</p>
-              </motion.a>
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <span className="text-[10px] text-mist font-medium">{c.domain}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
           <RailButtons rail={rail} />

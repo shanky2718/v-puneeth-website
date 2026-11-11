@@ -1,11 +1,23 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { profile } from '../data/portfolio';
+import { profile, ACADEMIC_PROFILES } from '../data/portfolio';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { EASE, Magnetic, Particles } from './fx';
 import { SeriesMark } from './Poster';
 
-export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
+export default function FinalCTA({
+  onReplay,
+  onOpenPublications,
+  onOpenTeaching,
+  onOpenAdministration,
+  onOpenActivities
+}: {
+  onReplay: () => void;
+  onOpenPublications?: () => void;
+  onOpenTeaching?: () => void;
+  onOpenAdministration?: () => void;
+  onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
+}) {
   const ref = useRef<HTMLElement>(null);
   const { scrollTo } = useSmoothScroll();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.2'] });
@@ -14,10 +26,11 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
   const opacity = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
 
   const ctas = [
-    { label: "Let's Build", href: `mailto:${profile.email}?subject=${encodeURIComponent("Let's build something")}`, primary: true, cursor: 'play' },
-    { label: 'LinkedIn', href: profile.links.linkedin, cursor: 'link' },
-    { label: 'GitHub', href: profile.links.github, cursor: 'link' },
+    { label: "Let's Collaborate", href: `mailto:${profile.email}?subject=${encodeURIComponent("Research Collaboration / Academic Inquiry")}`, primary: true, cursor: 'play' },
+    { label: 'Google Site', href: profile.links.googleSite, cursor: 'link' },
+    { label: 'CHRIST University', href: profile.links.christUniversity, cursor: 'link' },
     { label: 'Email', href: `mailto:${profile.email}`, cursor: 'link' },
+    { label: 'Call', href: `tel:${profile.phone}`, cursor: 'link' },
   ];
 
   return (
@@ -41,18 +54,21 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
       </motion.h2>
 
       <motion.div
-        className="relative mt-12"
+        className="relative mt-12 max-w-2xl"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-10% 0px' }}
         transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
       >
         <p className="font-sans text-2xl font-semibold tracking-[0.2em] text-bone sm:text-3xl">{profile.displayName.toUpperCase()}</p>
-        <p className="mt-2 text-xs font-semibold tracking-[0.4em] text-mist sm:text-sm">{profile.role.toUpperCase()}</p>
+        <p className="mt-2 text-xs font-semibold tracking-[0.3em] text-crimson-2 sm:text-sm">{profile.role.toUpperCase()}</p>
+        <p className="mt-1 text-xs text-mist">{profile.affiliation}</p>
+        <p className="mt-0.5 text-xs text-smoke">Bengaluru - 560029, Karnataka, India · +91-9663501058</p>
       </motion.div>
 
+      {/* Primary Communication Buttons */}
       <motion.div
-        className="relative mt-10 flex flex-wrap justify-center gap-3"
+        className="relative mt-8 flex flex-wrap justify-center gap-3"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
@@ -79,21 +95,80 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
         ))}
       </motion.div>
 
-      <div className="relative mt-16 flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-[0.24em] text-smoke">
+      {/* Academic Profiles Strip */}
+      <div className="relative mt-10 max-w-xl">
+        <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-smoke mb-3">Academic & Research Identifiers</p>
+        <div className="flex flex-wrap justify-center gap-2">
+          {ACADEMIC_PROFILES.map((p) => (
+            <a
+              key={p.name}
+              href={p.url}
+              target="_blank"
+              rel="noreferrer"
+              className="glass rounded-full px-3.5 py-1.5 text-xs font-medium text-bone hover:border-crimson-2 hover:text-crimson-2 transition flex items-center gap-1.5"
+            >
+              <span>{p.name}</span>
+              <span className="text-[10px] text-smoke">↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Fast Dossier Modal Access */}
+      <div className="relative mt-8 flex flex-wrap justify-center gap-2 max-w-2xl">
+        {onOpenPublications && (
+          <button
+            type="button"
+            onClick={onOpenPublications}
+            className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+          >
+            📄 73 Publications
+          </button>
+        )}
+        {onOpenTeaching && (
+          <button
+            type="button"
+            onClick={onOpenTeaching}
+            className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+          >
+            🎓 Teaching Statement
+          </button>
+        )}
+        {onOpenAdministration && (
+          <button
+            type="button"
+            onClick={onOpenAdministration}
+            className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+          >
+            🏛️ Administration & IQAC
+          </button>
+        )}
+        {onOpenActivities && (
+          <button
+            type="button"
+            onClick={() => onOpenActivities('funding')}
+            className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
+          >
+            💼 Grants (INR 12L+) & Events
+          </button>
+        )}
+      </div>
+
+      <div className="relative mt-12 flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-[0.24em] text-smoke">
         <button type="button" onClick={() => scrollTo(0, { offset: 0 })} className="hover:text-bone">
-          ↺ WATCH AGAIN
+          ↺ BACK TO TOP
         </button>
         <button type="button" onClick={onReplay} className="hover:text-bone">
           ▶ REPLAY OPENING
         </button>
       </div>
 
-      <footer className="absolute inset-x-0 bottom-0 px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
+      <footer className="relative mt-12 px-4 pb-6 text-center">
         <div className="mb-2 text-base">
           <SeriesMark />
         </div>
         <p className="text-[11px] leading-relaxed text-smoke">
-          © {new Date().getFullYear()} {profile.displayName}. A personal, streaming-inspired portfolio — not affiliated with any streaming service.
+          © {new Date().getFullYear()} Dr. Puneeth V. Assistant Professor, Department of Mathematics, CHRIST (Deemed to be University), Bengaluru, India.
         </p>
       </footer>
     </section>

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import { achievements, certifications, education, profile, projects, type ProfileId } from '../data/portfolio';
+import { achievements, profile, type ProfileId } from '../data/portfolio';
 import { useFinePointer } from '../hooks/useMedia';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { EASE, Magnetic, Particles } from './fx';
@@ -12,7 +12,19 @@ const item = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: EASE } },
 };
 
-export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => void; onResume: () => void; profileId: ProfileId }) {
+export default function Hero({
+  onPlay,
+  onResume,
+  onOpenPublications,
+  onOpenTeaching,
+  profileId,
+}: {
+  onPlay: () => void;
+  onResume: () => void;
+  onOpenPublications?: () => void;
+  onOpenTeaching?: () => void;
+  profileId: ProfileId;
+}) {
   const ref = useRef<HTMLElement>(null);
   const fine = useFinePointer();
   const { scrollTo } = useSmoothScroll();
@@ -37,16 +49,16 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
   const glowX = useTransform(px, [-1, 1], ['-6%', '6%']);
 
   const meta = [
-    education[0].period.split(' – ')[0].split(' ')[1] + ' – Present',
-    'B.Tech AI & ML',
-    `${projects.length} Originals`,
-    `${certifications.length} Certifications`,
+    'Stanford Top 2% (2024 & 2025)',
+    'Assistant Professor · CHRIST',
+    '73 Research Publications',
+    '1980+ Citations',
   ];
 
   const floating = [
-    { text: education[0].score, sub: 'B.Tech AI & ML', pos: 'left-[2%] top-[30%]', depth: 1 },
+    { text: 'Top 2%', sub: 'Stanford Global Scientist', pos: 'left-[2%] top-[30%]', depth: 1 },
     { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[0%] top-[18%]', depth: -1 },
-    { text: 'Java · React · Node.js', sub: 'Primary stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: 'PINNs · CFD · GenAI', sub: 'Primary Thrusts', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
   ];
 
   return (
@@ -128,7 +140,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         </motion.p>
 
         <motion.div variants={item} className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] font-medium text-mist">
-          <span className="rounded border border-white/25 px-1.5 py-px text-[10px] font-bold tracking-wider text-bone">AI·ML</span>
+          <span className="rounded border border-white/25 px-1.5 py-px text-[10px] font-bold tracking-wider text-bone">MATH·AI</span>
           {meta.map((m, i) => (
             <span key={m} className="flex items-center gap-3">
               {i > 0 && <span className="h-1 w-1 rounded-full bg-smoke" />}
@@ -151,23 +163,45 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
               type="button"
               data-cursor="play"
               onClick={onPlay}
-              className="flex min-h-12 items-center gap-3 rounded-md bg-bone px-6 py-3 text-[15px] font-bold text-ink transition hover:bg-white sm:px-8"
+              className="flex min-h-12 items-center gap-2.5 rounded-md bg-bone px-5 py-3 text-[14px] font-bold text-ink transition hover:bg-white sm:px-7"
             >
-              <span className="text-lg">▶</span> Play Intro
+              <span className="text-base">▶</span> Play Intro
             </button>
           </Magnetic>
+          {onOpenPublications && (
+            <Magnetic>
+              <button
+                type="button"
+                onClick={onOpenPublications}
+                className="glass flex min-h-12 items-center gap-2 rounded-md px-4 py-3 text-[14px] font-semibold text-bone transition hover:bg-white/15"
+              >
+                <span>📄</span> 73 Publications
+              </button>
+            </Magnetic>
+          )}
+          {onOpenTeaching && (
+            <Magnetic>
+              <button
+                type="button"
+                onClick={onOpenTeaching}
+                className="glass hidden sm:flex min-h-12 items-center gap-2 rounded-md px-4 py-3 text-[14px] font-semibold text-bone transition hover:bg-white/15"
+              >
+                <span>🎓</span> Teaching Statement
+              </button>
+            </Magnetic>
+          )}
           <Magnetic>
             {profileId === 'recruiter' ? (
-              <button type="button" onClick={onResume} className="glass flex min-h-12 items-center gap-3 rounded-md px-6 py-3 text-[15px] font-semibold text-bone transition hover:bg-white/15 sm:px-8">
-                <span className="text-lg">⤓</span> View Resume
+              <button type="button" onClick={onResume} className="glass flex min-h-12 items-center gap-2 rounded-md px-5 py-3 text-[14px] font-semibold text-bone transition hover:bg-white/15">
+                <span className="text-base">⤓</span> View Resume
               </button>
             ) : (
               <button
                 type="button"
                 onClick={() => scrollTo('#originals')}
-                className="glass flex min-h-12 items-center gap-3 rounded-md px-6 py-3 text-[15px] font-semibold text-bone transition hover:bg-white/15 sm:px-8"
+                className="glass flex min-h-12 items-center gap-2 rounded-md px-5 py-3 text-[14px] font-semibold text-bone transition hover:bg-white/15"
               >
-                <span className="text-xl leading-none">＋</span> My Work
+                <span className="text-lg leading-none">＋</span> Explore Research
               </button>
             )}
           </Magnetic>
