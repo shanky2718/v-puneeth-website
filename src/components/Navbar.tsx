@@ -280,14 +280,6 @@ export default function Navbar({
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={() => go('contact')}
-            className="hidden rounded-full border border-white/15 px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-bone transition hover:border-crimson-2 hover:text-crimson-2 sm:block"
-          >
-            LET&apos;S BUILD
-          </button>
-
           <div className="relative" ref={menuRef}>
             <button
               type="button"
@@ -373,7 +365,7 @@ export default function Navbar({
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.45, ease: EASE }}
           >
-            {[{ id: 'top', label: 'Home' }, ...order.map((id) => ({ id, label: sectionMeta[id].nav })), { id: 'testimonials', label: 'Testimonials' }, { id: 'contact', label: "Let's Build" }].map((l, i) => (
+            {[{ id: 'top', label: 'Home' }, ...order.map((id) => ({ id, label: sectionMeta[id].nav })), { id: 'testimonials', label: 'Testimonials' }].map((l, i) => (
               <motion.button
                 key={l.id}
                 type="button"

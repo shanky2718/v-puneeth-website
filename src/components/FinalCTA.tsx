@@ -63,9 +63,8 @@ export default function FinalCTA({
         transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
       >
         <p className="font-sans text-2xl font-semibold tracking-[0.2em] text-bone sm:text-3xl">{profile.displayName.toUpperCase()}</p>
-        <p className="mt-2 text-xs font-semibold tracking-[0.3em] text-crimson-2 sm:text-sm">{profile.role.toUpperCase()}</p>
-        <p className="mt-1 text-xs text-mist">{profile.affiliation}</p>
-        <p className="mt-0.5 text-xs text-smoke">Bengaluru - 560029, Karnataka, India · +91-9663501058</p>
+        <p className="mt-2 text-xs font-semibold tracking-[0.3em] text-crimson-2 sm:text-sm">ASSISTANT PROFESSOR</p>
+        <p className="mt-1 text-xs text-mist">Department of Mathematics, CHRIST (Deemed to be University)</p>
       </motion.div>
 
       {/* Primary Communication Buttons */}
