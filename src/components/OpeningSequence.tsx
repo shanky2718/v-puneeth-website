@@ -107,16 +107,8 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
           animate={beat >= 2 ? { opacity: 1, scale: 1, filter: 'blur(0px)', letterSpacing: '0.04em', y: beat >= 4 ? '-30vh' : 0 } : {}}
           transition={{ duration: 1.3, ease: EASE }}
         >
-          {profile.firstName}
+          {profile.displayName}
         </motion.h1>
-        <motion.p
-          className="font-sans text-sm font-bold text-crimson-2 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)] sm:text-lg"
-          initial={{ opacity: 0, letterSpacing: '1.4em' }}
-          animate={beat >= 3 ? { opacity: 1, letterSpacing: '0.7em', y: beat >= 4 ? '-30vh' : 0 } : {}}
-          transition={{ duration: 1.1, ease: EASE }}
-        >
-          {profile.seriesTag}
-        </motion.p>
       </div>
 
       {/* role + play */}

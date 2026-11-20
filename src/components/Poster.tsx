@@ -96,7 +96,7 @@ export function ProjectArt({ project, className = '' }: { project: Project; clas
 /** Small fictional platform mark used in the nav and on cards. */
 export function SeriesMark({ className = '' }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 ${className}`}>
+    <span className={`inline-flex items-center gap-2 ${className}`}>
       <svg viewBox="0 0 24 32" className="h-[1.1em] w-auto" aria-hidden>
         <path
           d="M6 28V4h7c3.5 0 6 2.8 6 6.5s-2.5 6.5-6 6.5H6"
@@ -107,7 +107,7 @@ export function SeriesMark({ className = '' }: { className?: string }) {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="font-sans text-[0.62em] font-bold tracking-[0.36em] text-mist">SERIES</span>
+      <span className="font-sans text-[0.7em] font-bold tracking-[0.2em] text-bone">DR. PUNEETH V</span>
     </span>
   );
 }

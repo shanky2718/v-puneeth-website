@@ -184,9 +184,6 @@ export default function FinalCTA({
       </div>
 
       <footer className="relative mt-12 px-4 pb-6 text-center">
-        <div className="mb-2 text-base">
-          <SeriesMark />
-        </div>
         <p className="text-[11px] leading-relaxed text-smoke">
           © {new Date().getFullYear()} Dr. Puneeth V. Assistant Professor, Department of Mathematics, CHRIST (Deemed to be University), Bengaluru, India.
         </p>

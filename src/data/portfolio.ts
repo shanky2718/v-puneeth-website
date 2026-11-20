@@ -9,9 +9,8 @@ export const profile = {
   fullName: 'Dr. Puneeth V',
   displayName: 'Dr. Puneeth V',
   firstName: 'PUNEETH',
-  seriesTag: 'THE SERIES',
-  /** Fictional studio card shown at the start of the opening sequence. */
-  originalLabel: 'A PUNEETH V ORIGINAL',
+  seriesTag: '',
+  originalLabel: 'DR. PUNEETH V',
   role: 'Assistant Professor · Executive Editor · IQAC Coordinator · Industry-Academia Ambassador',
   designations: [
     'Assistant Professor, Department of Mathematics',
@@ -629,7 +628,7 @@ export const viewerProfiles: {
   {
     id: 'puneeth',
     name: 'Dr. Puneeth V',
-    blurb: 'The complete academic series, in order',
+    blurb: 'The complete academic portfolio, in order',
     color: '#e5132b',
     order: ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'],
   },

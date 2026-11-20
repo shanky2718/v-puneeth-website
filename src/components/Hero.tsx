@@ -132,15 +132,12 @@ export default function Hero({
         initial="hidden"
         animate="show"
       >
-        <motion.div variants={item} className="mb-3 text-lg">
-          <SeriesMark />
-        </motion.div>
-        <motion.h1 variants={item} className="font-display leading-[0.82] tracking-[0.02em] text-bone" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)' }}>
-          <span className="shimmer-text">{profile.firstName}</span>
-        </motion.h1>
-        <motion.p variants={item} className="mt-1 font-sans text-sm font-bold tracking-[0.62em] text-crimson-2 sm:text-base">
-          {profile.seriesTag}
+        <motion.p variants={item} className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.28em] text-crimson-2">
+          ACADEMIC PORTFOLIO
         </motion.p>
+        <motion.h1 variants={item} className="font-display leading-[0.82] tracking-[0.02em] text-bone" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)' }}>
+          <span className="shimmer-text">PUNEETH V</span>
+        </motion.h1>
 
         <motion.div variants={item} className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] font-medium text-mist">
           <span className="rounded border border-white/25 px-1.5 py-px text-[10px] font-bold tracking-wider text-bone">MATH·AI</span>
