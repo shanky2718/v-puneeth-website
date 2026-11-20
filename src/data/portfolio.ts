@@ -12,11 +12,17 @@ export const profile = {
   seriesTag: 'THE SERIES',
   /** Fictional studio card shown at the start of the opening sequence. */
   originalLabel: 'A PUNEETH V ORIGINAL',
-  role: 'Assistant Professor · Mathematician · AI Researcher',
+  role: 'Assistant Professor · Executive Editor · IQAC Coordinator · Industry-Academia Ambassador',
+  designations: [
+    'Assistant Professor, Department of Mathematics',
+    'Executive Editor, CU Journal of Non-Linear Fluid Mechanics (CU JONLFM)',
+    'Coordinator, Internal Quality Assurance Cell (IQAC)',
+    'Industry-Academia Ambassador',
+  ],
   affiliation: 'Department of Mathematics, CHRIST (Deemed to be University)',
-  tagline: ['Stanford Top 2% Scientist', 'Physics-Informed Neural Networks', 'CFD & Applied Math'],
+  tagline: ['Stanford Top 2% Scientist', 'Reduced Order Modelling (ROM)', 'Executive Editor · CU JONLFM', 'IQAC & Industry Ambassador'],
   intro:
-    'Assistant Professor in the Department of Mathematics at CHRIST (Deemed to be University), Bengaluru, and Visiting Lecturer at Universiti Malaysia Terengganu. Ranked among Stanford University’s World Top 2% Most Influential Scientists (2024 & 2025). Specializing in Physics-Informed Neural Networks (PINNs), Computational Fluid Dynamics (CFD), and Generative AI for Higher Education.',
+    'Assistant Professor in the Department of Mathematics at CHRIST (Deemed to be University), Bengaluru, Executive Editor of CU Journal of Non-Linear Fluid Mechanics, IQAC Coordinator, Industry-Academia Ambassador, and Visiting Lecturer at Universiti Malaysia Terengganu. Ranked among Stanford University’s World Top 2% Most Influential Scientists (2024 & 2025). Specializing in Reduced Order Modelling (ROM), Physics-Informed Neural Networks (PINNs), Computational Fluid Dynamics (CFD), and Generative AI for Higher Education.',
   location: 'Bengaluru 560029, Karnataka, India',
   email: 'puneeth.v@christuniversity.in',
   phone: '+91-9663501058',
@@ -33,6 +39,7 @@ export const profile = {
     alt: 'Portrait of Dr. Puneeth V',
   },
   interests: [
+    'Reduced Order Modelling (ROM)',
     'Physics-Informed Neural Networks (PINNs)',
     'Computational Fluid Dynamics (CFD)',
     'Generative AI for Educators',
@@ -275,10 +282,10 @@ export const achievements: Achievement[] = [
   },
   {
     id: 'editorial-board',
-    title: 'Assistant Editor',
+    title: 'Executive Editor',
     org: 'CU Journal of Non-Linear Fluid Mechanics',
-    detail: 'Serving on editorial boards for Mapana Journal of Sciences and CU Journal of Non-Linear Fluid Mechanics.',
-    laurel: 'Editorial Board',
+    detail: 'Serving as Executive Editor for CU Journal of Non-Linear Fluid Mechanics (CU JONLFM) and editorial board member for Mapana Journal of Sciences.',
+    laurel: 'Editorial Leadership',
     link: 'https://sites.google.com/view/v-puneeth',
   },
   {
@@ -907,7 +914,8 @@ export const ABOUT_PARAGRAPHS = [
 ];
 
 export const RESEARCH_INTERESTS_STATEMENT = [
-  "My research interests lie at the intersection of mathematical theory, computational science, and data-driven modelling, with a strong emphasis on addressing contemporary scientific and industrial challenges. In recent years, my research has actively expanded towards integrating machine learning frameworks such as Physics-Informed Neural Networks (PINNs) and Artificial Neural Networks (ANNs) with classical governing equations to enhance the analysis, prediction, and control of complex fluid flow and heat transfer problems. I am interested in hybrid modelling approaches that combine first-principles mathematics with data-driven intelligence to overcome limitations of purely analytical or numerical methods.",
+  "My primary research interests focus on Reduced Order Modelling (ROM) and the confluence of mathematical theory, computational science, and data-driven intelligence. In Reduced Order Modelling (ROM), I develop low-dimensional dynamical surrogates from high-order systems of partial differential equations and high-fidelity CFD simulations, enabling rapid real-time computation, parameter estimation, and optimization without compromising physical fidelity.",
+  "In recent years, my research has actively expanded towards integrating machine learning frameworks such as Physics-Informed Neural Networks (PINNs) and Artificial Neural Networks (ANNs) with classical governing equations to enhance the analysis, prediction, and control of complex fluid flow and heat transfer problems. I am interested in hybrid modelling approaches that combine first-principles mathematics with data-driven intelligence to overcome limitations of purely analytical or numerical methods.",
   "I also engage with computational fluid dynamics (CFD) as both a research and visualization tool, employing platforms such as ANSYS Fluent to study flow behaviour, validate mathematical models, and generate high-fidelity visual insights for complex transport phenomena. My research interests are in computational fluid dynamics with applications to thermal systems and transient flow problems relevant to energy and industrial engineering. Recently, I have conducted CFD investigations on shell-and-tube heat exchangers (STHX) to analyze flow behavior, thermal performance, and design efficiency under realistic operating conditions. In addition, I have studied sloshing dynamics in storage tanks, focusing on transient free-surface flows and their implications for structural integrity and operational safety. These studies motivate my pursuit of postdoctoral research in CFD-based analysis and optimization of engineering systems."
 ];
 
@@ -926,6 +934,14 @@ export interface AdminPosition {
 }
 
 export const ADMINISTRATIVE_POSITIONS: AdminPosition[] = [
+  {
+    title: 'Industry-Academia Ambassador',
+    departmentOrSchool: 'Department of Mathematics',
+    institution: 'CHRIST (Deemed to be University) | Bengaluru, India',
+    period: '2024 – Present',
+    badge: 'INDUSTRY COLLABORATION & LIAISON',
+    description: 'Serving as the institutional Industry-Academia Ambassador, bridging mathematical and computational theoretical research with industrial applications, corporate consulting (including ATOMALLOYS), technology transfer, and student internship pathways.'
+  },
   {
     title: 'Coordinator, Centre for Mathematical Needs',
     departmentOrSchool: 'Department of Mathematics',
@@ -982,7 +998,7 @@ export const ADMINISTRATIVE_POSITIONS: AdminPosition[] = [
 export const EDITORIAL_BOARD_ROLES = [
   {
     journal: 'CU Journal of Non-Linear Fluid Mechanics',
-    role: 'Assistant Editor',
+    role: 'Executive Editor',
     scope: 'Non-linear boundary layer dynamics, non-Newtonian flows, computational fluid dynamics',
     publisher: 'CHRIST University Academic Press'
   },
@@ -1496,7 +1512,7 @@ export const networkingInstitutions: NetworkingInstitution[] = [
 export const editorialRoles: EditorialRole[] = [
   {
     journal: "CU Journal of Non-Linear Fluid Mechanics",
-    role: "Assistant Editor",
+    role: "Executive Editor",
     url: "https://journals.christuniversity.in/index.php/cujnlfm"
   },
   {

@@ -17,12 +17,14 @@ export default function Hero({
   onResume,
   onOpenPublications,
   onOpenTeaching,
+  onOpenLOR,
   profileId,
 }: {
   onPlay: () => void;
   onResume: () => void;
   onOpenPublications?: () => void;
   onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
+  onOpenLOR?: () => void;
   profileId: ProfileId;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -51,14 +53,14 @@ export default function Hero({
   const meta = [
     'Stanford Top 2% (2024 & 2025)',
     'Assistant Professor · CHRIST',
-    '73 Research Publications',
-    '1980+ Citations',
+    'Executive Editor · CU JONLFM',
+    'IQAC & Industry Ambassador',
   ];
 
   const floating = [
     { text: 'Top 2%', sub: 'Stanford Global Scientist', pos: 'left-[2%] top-[30%]', depth: 1 },
-    { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[0%] top-[18%]', depth: -1 },
-    { text: 'PINNs · CFD · GenAI', sub: 'Primary Thrusts', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: 'Executive Editor', sub: 'CU Journal of NLFM', pos: 'right-[0%] top-[18%]', depth: -1 },
+    { text: 'ROM · PINNs · CFD', sub: 'Primary Research Thrusts', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
   ];
 
   return (
@@ -205,6 +207,17 @@ export default function Hero({
               </button>
             )}
           </Magnetic>
+          {onOpenLOR && (
+            <Magnetic>
+              <button
+                type="button"
+                onClick={onOpenLOR}
+                className="glass flex min-h-12 items-center gap-2 rounded-md border border-crimson/40 px-5 py-3 text-[14px] font-semibold text-crimson-2 transition hover:bg-crimson/15"
+              >
+                <span>📜</span> Request LOR
+              </button>
+            </Magnetic>
+          )}
           <button
             type="button"
             onClick={() => scrollTo('#about')}

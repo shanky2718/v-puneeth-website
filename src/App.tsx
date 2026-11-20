@@ -29,6 +29,7 @@ const CollaboratorsModal = lazy(() => import('./components/CollaboratorsModal'))
 const TeachingStatementModal = lazy(() => import('./components/TeachingStatementModal'));
 const AdministrationModal = lazy(() => import('./components/AdministrationModal'));
 const AcademicActivitiesModal = lazy(() => import('./components/AcademicActivitiesModal'));
+const LORModal = lazy(() => import('./components/LORModal'));
 
 type Stage = 'opening' | 'profiles' | 'home';
 
@@ -65,6 +66,7 @@ function Series() {
   const [administrationOpen, setAdministrationOpen] = useState(false);
   const [activitiesOpen, setActivitiesOpen] = useState(false);
   const [activitiesTab, setActivitiesTab] = useState<'funding' | 'events' | 'talks' | 'certifications' | 'references'>('funding');
+  const [lorOpen, setLorOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const { scrollTo, lock, unlock } = useSmoothScroll();
 
@@ -110,6 +112,7 @@ function Series() {
   const closeTeaching = useCallback(() => setTeachingOpen(false), []);
   const closeAdministration = useCallback(() => setAdministrationOpen(false), []);
   const closeActivities = useCallback(() => setActivitiesOpen(false), []);
+  const closeLOR = useCallback(() => setLorOpen(false), []);
 
   const openTeachingWithTab = useCallback((tab: 'statement' | 'courses' | 'testimonials' = 'statement') => {
     setTeachingTab(tab);
@@ -126,6 +129,7 @@ function Series() {
       <About
         onOpenTeaching={openTeachingWithTab}
         onOpenAdministration={() => setAdministrationOpen(true)}
+        onOpenLOR={() => setLorOpen(true)}
       />
     ),
     journey: <Seasons />,
@@ -149,6 +153,7 @@ function Series() {
         onOpenTeaching={openTeachingWithTab}
         onOpenPublications={() => setPublicationsOpen(true)}
         onOpenAdministration={() => setAdministrationOpen(true)}
+        onOpenLOR={() => setLorOpen(true)}
       />
     ),
   };
@@ -175,6 +180,7 @@ function Series() {
             onOpenCollaborators={() => setCollaboratorsOpen(true)}
             onOpenAdministration={() => setAdministrationOpen(true)}
             onOpenActivities={openActivitiesWithTab}
+            onOpenLOR={() => setLorOpen(true)}
           />
           <main>
             <Hero
@@ -183,6 +189,7 @@ function Series() {
               onResume={() => setResumeOpen(true)}
               onOpenPublications={() => setPublicationsOpen(true)}
               onOpenTeaching={openTeachingWithTab}
+              onOpenLOR={() => setLorOpen(true)}
               profileId={profileId}
             />
             <ContinueWatching order={order} />
@@ -191,13 +198,14 @@ function Series() {
                 {sections[id]}
               </Scene>
             ))}
-            <TestimonialsSection />
+            <TestimonialsSection onOpenLOR={() => setLorOpen(true)} />
             <FinalCTA
               onReplay={() => setStage('opening')}
               onOpenPublications={() => setPublicationsOpen(true)}
               onOpenTeaching={openTeachingWithTab}
               onOpenAdministration={() => setAdministrationOpen(true)}
               onOpenActivities={openActivitiesWithTab}
+              onOpenLOR={() => setLorOpen(true)}
             />
           </main>
         </motion.div>
@@ -212,6 +220,7 @@ function Series() {
         <AnimatePresence>{teachingOpen && <TeachingStatementModal key="teaching" initialTab={teachingTab} onClose={closeTeaching} />}</AnimatePresence>
         <AnimatePresence>{administrationOpen && <AdministrationModal key="admin" onClose={closeAdministration} />}</AnimatePresence>
         <AnimatePresence>{activitiesOpen && <AcademicActivitiesModal key="activities" initialTab={activitiesTab} onClose={closeActivities} />}</AnimatePresence>
+        <AnimatePresence>{lorOpen && <LORModal key="lor" onClose={closeLOR} />}</AnimatePresence>
       </Suspense>
 
       <AnimatePresence>

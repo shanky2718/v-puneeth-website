@@ -12,10 +12,12 @@ import { EASE, SectionHeading, Tilt } from './fx';
 
 export default function About({
   onOpenTeaching,
-  onOpenAdministration
+  onOpenAdministration,
+  onOpenLOR,
 }: {
   onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenAdministration?: () => void;
+  onOpenLOR?: () => void;
 }) {
   const [subjectFilter, setSubjectFilter] = useState<'All' | 'Pure Mathematics' | 'Applied Mathematics' | 'Computational & Data Analytics' | 'Foundations'>('All');
 
@@ -66,9 +68,16 @@ export default function About({
           {/* Quick Academic Profile Summary Card */}
           <div className="mt-6 rounded-2xl bg-ink-2 p-5 ring-1 ring-white/10 space-y-3">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson-2">Institutional Contact</p>
-              <p className="mt-1 font-semibold text-bone text-sm">{profile.role}</p>
-              <p className="text-xs text-mist">{profile.affiliation}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-crimson-2">Designations & Institutional Governance</p>
+              <div className="mt-2 space-y-1.5">
+                {profile.designations.map((d) => (
+                  <div key={d} className="flex items-start gap-2 text-xs font-semibold text-bone">
+                    <span className="h-1.5 w-1.5 rounded-full bg-crimson-2 mt-1.5 shrink-0" />
+                    <span>{d}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-mist">{profile.affiliation}</p>
               <p className="text-xs text-smoke">Bengaluru - 560029, Karnataka, India</p>
             </div>
             <div className="border-t border-white/10 pt-3 flex flex-wrap gap-2 text-xs">
@@ -80,6 +89,17 @@ export default function About({
                 {profile.phone}
               </a>
             </div>
+            {onOpenLOR && (
+              <div className="border-t border-white/10 pt-3">
+                <button
+                  type="button"
+                  onClick={onOpenLOR}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-crimson/15 border border-crimson/40 px-3 py-2 text-xs font-bold text-crimson-2 hover:bg-crimson/25 transition"
+                >
+                  <span>📜</span> Request a Letter of Recommendation (LOR) →
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
 

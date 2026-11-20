@@ -22,12 +22,14 @@ export default function ResumeSection({
   onView,
   onOpenTeaching,
   onOpenPublications,
-  onOpenAdministration
+  onOpenAdministration,
+  onOpenLOR,
 }: {
   onView: () => void;
   onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenPublications?: () => void;
   onOpenAdministration?: () => void;
+  onOpenLOR?: () => void;
 }) {
   return (
     <>
@@ -97,6 +99,16 @@ export default function ResumeSection({
                 className="rounded-md border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-[#4cc9ff] hover:bg-white/10 text-center transition"
               >
                 🏛️ Administration & IQAC Roles ↗
+              </button>
+            )}
+
+            {onOpenLOR && (
+              <button
+                type="button"
+                onClick={onOpenLOR}
+                className="rounded-md border border-crimson/30 bg-crimson/10 py-2.5 text-xs font-semibold text-crimson-2 hover:bg-crimson/20 text-center transition"
+              >
+                📜 Letter of Recommendation (LOR) ↗
               </button>
             )}
           </div>

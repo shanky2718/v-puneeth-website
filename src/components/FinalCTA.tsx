@@ -10,13 +10,15 @@ export default function FinalCTA({
   onOpenPublications,
   onOpenTeaching,
   onOpenAdministration,
-  onOpenActivities
+  onOpenActivities,
+  onOpenLOR,
 }: {
   onReplay: () => void;
   onOpenPublications?: () => void;
   onOpenTeaching?: (tab?: 'statement' | 'courses' | 'testimonials') => void;
   onOpenAdministration?: () => void;
   onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
+  onOpenLOR?: () => void;
 }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollTo } = useSmoothScroll();
@@ -159,6 +161,15 @@ export default function FinalCTA({
             className="rounded-lg bg-white/5 px-3 py-1.5 text-xs font-semibold text-mist hover:text-bone hover:bg-white/10"
           >
             💼 Grants (INR 12L+) & Events
+          </button>
+        )}
+        {onOpenLOR && (
+          <button
+            type="button"
+            onClick={onOpenLOR}
+            className="rounded-lg bg-crimson/20 border border-crimson/40 px-3 py-1.5 text-xs font-bold text-crimson-2 hover:bg-crimson/30"
+          >
+            📜 Letter of Recommendation (LOR)
           </button>
         )}
       </div>

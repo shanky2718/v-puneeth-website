@@ -16,6 +16,7 @@ export default function Navbar({
   onOpenCollaborators,
   onOpenAdministration,
   onOpenActivities,
+  onOpenLOR,
 }: {
   order: SectionId[];
   profileId: ProfileId;
@@ -26,6 +27,7 @@ export default function Navbar({
   onOpenCollaborators?: () => void;
   onOpenAdministration?: () => void;
   onOpenActivities?: (tab?: 'funding' | 'events' | 'talks' | 'certifications' | 'references') => void;
+  onOpenLOR?: () => void;
 }) {
   const { scrollY } = useScroll();
   const [solid, setSolid] = useState(false);
@@ -237,6 +239,19 @@ export default function Navbar({
                         </button>
                       </>
                     )}
+                    {onOpenLOR && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDossierMenu(false);
+                          onOpenLOR();
+                        }}
+                        className="flex w-full items-center gap-3 rounded-lg border-t border-white/10 px-3 py-2 text-left text-xs font-semibold text-crimson-2 hover:bg-white/10"
+                      >
+                        <span className="text-crimson-2 font-mono">10.</span>
+                        <span>Letter of Recommendation (LOR)</span>
+                      </button>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -444,6 +459,18 @@ export default function Navbar({
                   className="block w-full text-left py-1 text-sm font-semibold text-bone"
                 >
                   💼 Grants (INR 12L+), Talks & Events
+                </button>
+              )}
+              {onOpenLOR && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileNav(false);
+                    onOpenLOR();
+                  }}
+                  className="block w-full text-left py-1 text-sm font-semibold text-crimson-2"
+                >
+                  📜 Letter of Recommendation (LOR)
                 </button>
               )}
             </div>

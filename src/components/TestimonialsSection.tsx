@@ -12,7 +12,11 @@ export interface ExtendedTestimonial extends Testimonial {
 
 const LOCAL_STORAGE_KEY = 'dr_puneeth_community_testimonials';
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({
+  onOpenLOR,
+}: {
+  onOpenLOR?: () => void;
+} = {}) {
   const [items, setItems] = useState<ExtendedTestimonial[]>(() => {
     try {
       const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -148,6 +152,16 @@ export default function TestimonialsSection() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
+            {onOpenLOR && (
+              <button
+                type="button"
+                onClick={onOpenLOR}
+                className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-xs font-bold uppercase tracking-wider text-bone transition hover:bg-white/10 hover:border-crimson-2 hover:text-crimson-2"
+              >
+                <span>📜</span>
+                <span>Request LOR</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setFormOpen((o) => !o)}
