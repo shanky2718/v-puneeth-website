@@ -58,9 +58,10 @@ export default function Hero({
   ];
 
   const floating = [
-    { text: 'Top 2%', sub: 'Stanford Global Scientist', pos: 'left-[2%] top-[30%]', depth: 1 },
-    { text: 'Executive Editor', sub: 'CU Journal of NLFM', pos: 'right-[0%] top-[18%]', depth: -1 },
-    { text: 'ROM · PINNs · CFD', sub: 'Primary Research Thrusts', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: 'Top 2%', sub: 'Stanford Global Scientist', pos: 'left-[-4%] top-[22%]', depth: 1, color: '#e5132b' },
+    { text: 'Executive Editor', sub: 'CU Journal of NLFM', pos: 'right-[-2%] top-[16%]', depth: -1, color: '#4cc9ff' },
+    { text: 'ROM · PINNs · CFD', sub: 'Primary Research Thrusts', pos: 'right-[-4%] bottom-[24%]', depth: 0.6, color: '#ffb547' },
+    { text: 'IQAC Coordinator', sub: 'Governance & Quality', pos: 'left-[-6%] bottom-[32%]', depth: -0.8, color: '#46e3a8' },
   ];
 
   return (
@@ -155,9 +156,25 @@ export default function Hero({
           {profile.tagline.join(' • ')}
         </motion.p>
 
-        <motion.p variants={item} className="mt-4 max-w-xl text-[15px] leading-relaxed text-bone/80 sm:text-base">
-          {profile.intro}
-        </motion.p>
+        {/* Highlight Badges (Replacing the long intro text) */}
+        <motion.div variants={item} className="mt-5 grid grid-cols-2 gap-2.5 max-w-lg">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-md ring-1 ring-white/5 transition hover:border-crimson-2/40">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-crimson-2">Primary Thrust</p>
+            <p className="mt-0.5 text-xs font-bold text-bone">Reduced Order Modelling (ROM)</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-md ring-1 ring-white/5 transition hover:border-[#4cc9ff]/40">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-[#4cc9ff]">Editorial Leadership</p>
+            <p className="mt-0.5 text-xs font-bold text-bone">Executive Editor · CU JONLFM</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-md ring-1 ring-white/5 transition hover:border-emerald-400/40">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-400">Institutional Role</p>
+            <p className="mt-0.5 text-xs font-bold text-bone">IQAC Coordinator · CHRIST</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-md ring-1 ring-white/5 transition hover:border-[#ffb547]/40">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-[#ffb547]">Global & Industry</p>
+            <p className="mt-0.5 text-xs font-bold text-bone">Industry Ambassador · UMT</p>
+          </div>
+        </motion.div>
 
         <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
           <Magnetic>
@@ -236,20 +253,41 @@ export default function Hero({
 
 type MV = ReturnType<typeof useTransform<number, number>>;
 
-function FloatChip({ text, sub, pos, depth, index, mx, my }: { text: string; sub: string; pos: string; depth: number; index: number; mx: MV; my: MV }) {
+function FloatChip({
+  text,
+  sub,
+  pos,
+  depth,
+  index,
+  color = '#e5132b',
+  mx,
+  my,
+}: {
+  text: string;
+  sub: string;
+  pos: string;
+  depth: number;
+  index: number;
+  color?: string;
+  mx: MV;
+  my: MV;
+}) {
   const x = useTransform(mx, (n: number) => n * depth);
   const y = useTransform(my, (n: number) => n * depth);
   return (
     <motion.div
-      className={`glass absolute hidden rounded-xl px-4 py-2.5 md:block ${pos}`}
+      className={`glass absolute hidden rounded-xl px-4 py-2.5 md:block shadow-2xl backdrop-blur-md ring-1 ring-white/15 ${pos}`}
       style={{ x, y }}
       initial={{ opacity: 0, filter: 'blur(6px)' }}
       animate={{ opacity: 1, filter: 'blur(0px)' }}
       transition={{ duration: 0.9, delay: 1.2 + index * 0.18, ease: EASE }}
     >
       <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 5 + index, repeat: Infinity, ease: 'easeInOut' }}>
-        <p className="text-sm font-semibold text-bone">{text}</p>
-        <p className="text-[10px] uppercase tracking-[0.2em] text-mist">{sub}</p>
+        <div className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
+          <p className="text-sm font-semibold text-bone">{text}</p>
+        </div>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-mist mt-0.5">{sub}</p>
       </motion.div>
     </motion.div>
   );
